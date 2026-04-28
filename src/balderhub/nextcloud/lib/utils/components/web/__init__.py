@@ -3,6 +3,7 @@ from .files_list_table import FilesListTable
 from .files_table_bulk_action import FilesTableBulkAction
 from .menu_context import MenuContextForFile, MenuContextForFolder
 from .menu_plus import MenuPlus
+from .menu_settings import SettingMenu
 from .modal_copy_or_move_to import ModalCopyOrMoveTo
 from .modal_new_directory import ModalNewDirectory
 from .modal_new_text_file import ModalNewTextFile
@@ -17,6 +18,7 @@ __all__ = [
     'FilesTableBulkAction',
     'MenuContextForFile', 'MenuContextForFolder',
     'MenuPlus',
+    'SettingMenu',
     'ModalCopyOrMoveTo',
     'ModalNewDirectory',
     'ModalNewTextFile',
