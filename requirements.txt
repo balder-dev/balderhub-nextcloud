@@ -8,3 +8,4 @@ pylint~=3.3.9
 balderhub-unit
 balderhub-url
 balderhub-html~=0.0.1b3
+balderhub-selenium
