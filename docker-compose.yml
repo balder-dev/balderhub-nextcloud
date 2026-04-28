@@ -1,0 +1,35 @@
+services:
+  nextcloud:
+    # project https://github.com/nextcloud/docker
+    image: nextcloud:30
+    environment:
+      - SQLITE_DATABASE=nextcloudsqlite
+      - NEXTCLOUD_TRUSTED_DOMAINS=nextcloud
+      - NEXTCLOUD_ADMIN_USER=admin
+      - NEXTCLOUD_ADMIN_PASSWORD=Admin12345
+      - NC_PASS=yrtPymrWbR6Rg4fkzEUX
+    ports:
+      - 127.0.0.1:8000:80
+  seleniumfirefox:
+    image: selenium/standalone-firefox:4.35
+    container_name: ${CONTAINER_NAME_FIREFOX:-firefox}
+    shm_size: 2gb
+    environment:
+      SE_NODE_MAX_SESSIONS: 2
+    ports:
+      - "127.0.0.1:4444:4444"
+    volumes:
+      - ./docker/firefox/upload-data:/uploads:ro
+  testb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ${CONTAINER_NAME_TEST:-test}
+    environment:
+      SELENIUM_HOSTNAME: seleniumfirefox
+    volumes:
+      - ./src:/code/src
+      - ./tests:/code/tests
+    depends_on:
+      - seleniumfirefox
+      - nextcloud
