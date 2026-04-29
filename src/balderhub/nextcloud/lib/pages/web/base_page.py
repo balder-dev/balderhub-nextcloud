@@ -31,7 +31,7 @@ class BasePage(HtmlPage):
         :return: selector to get the video modal
         """
         return ModalVideo.by_selector(
-            self.driver, Selector.by_xpath(".//div[contains(@class, 'modal-wrapper') and .//video")
+            self.driver, Selector.by_xpath(".//div[contains(@class, 'modal-wrapper') and .//video]")
         )
 
     @property
