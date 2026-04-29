@@ -1,26 +1,26 @@
-from typing import Union, List
+import balder
 
+import balderhub.html.contrib.auth.pages
 from balderhub.html.lib.utils import components as html
 from balderhub.html.lib.utils.selector import Selector
 from balderhub.url.lib.utils import Url
+from ...scenario_features.is_nextcloud_server import IsNextcloudServer
 
-from .base_page import BasePage
 
-
-class PageLogin(BasePage):
+class PageLogin(balderhub.html.contrib.auth.pages.LoginPage):
     """
     page where the user can log in
     """
 
-    @property
-    def applicable_on_url_schema(self) -> Union[Url, List[Url]]:
-        return Url(f'{self.Server.nextcloud.root_url.as_string()}/login')
+    class Server(balder.VDevice):
+        """
+        remote serve vdevice
+        """
+        nextcloud = IsNextcloudServer()
 
-    def open(self):
-        """
-        opens the web app page
-        """
-        self.driver.navigate_to(self.applicable_on_url_schema.as_string())
+    @property
+    def url(self) -> Url:
+        return Url(f'{self.Server.nextcloud.root_url.as_string()}/login')
 
     @property
     def input_username(self):
